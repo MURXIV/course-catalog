@@ -7,9 +7,10 @@ export default async function CoursesPage() {
 
   return (
     <section>
-      <h1 className="text-3xl font-bold">Курсы</h1>
-      <p className="mt-3 text-slate-600">Выберите курс, чтобы прочитать описание и поставить лайк.</p>
-      <div className="mt-8 grid gap-5 sm:grid-cols-2">
+      <p className="sea-label mb-4">Меню знаний</p>
+      <h1 className="text-4xl font-bold">Курсы Бикини-Боттом</h1>
+      <p className="mt-3 font-medium">Выберите курс, чтобы прочитать описание и поставить лайк.</p>
+      <div className="mt-8 grid gap-6 sm:grid-cols-2">
         {courses.map((course) => (
           <CourseCard
             key={course.id}

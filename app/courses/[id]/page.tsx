@@ -18,7 +18,7 @@ export default async function CoursePage({ params }: { params: Promise<{ id: str
   }
 
   return (
-    <article className="max-w-3xl space-y-6">
+    <article className="paper max-w-3xl space-y-6">
       <Link href="/courses" className="text-blue-700 hover:underline">← Все курсы</Link>
       <h1 className="text-3xl font-bold leading-tight">{course.title}</h1>
       <p className="text-lg leading-8 text-slate-600">{course.description}</p>

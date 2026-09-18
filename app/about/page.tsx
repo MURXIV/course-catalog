@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <section className="max-w-2xl space-y-5">
+    <section className="paper max-w-2xl space-y-5">
       <h1 className="text-3xl font-bold">О проекте</h1>
       <p className="leading-8 text-slate-600">
         Course Catalog — учебный каталог курсов по веб-разработке.

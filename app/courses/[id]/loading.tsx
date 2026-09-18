@@ -1,6 +1,6 @@
 export default function LoadingCourse() {
   return (
-    <p role="status" className="py-8 text-lg text-slate-600">
+    <p role="status" className="paper py-8 text-lg">
       Загрузка курса…
     </p>
   );

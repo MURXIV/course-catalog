@@ -14,7 +14,7 @@ export default function LikeButton({ initialLikes }: LikeButtonProps) {
       type="button"
       onClick={() => setLikes((previous) => previous + 1)}
       aria-label={`Поставить лайк. Лайков: ${likes}`}
-      className="rounded-lg border border-rose-200 bg-rose-50 px-5 py-3 font-semibold text-rose-700 hover:bg-rose-100 focus-visible:outline-2 focus-visible:outline-rose-700"
+      className="sea-button"
     >
       <span aria-live="polite">❤ {likes}</span>
     </button>
