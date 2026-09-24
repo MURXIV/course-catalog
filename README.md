@@ -1,109 +1,68 @@
 # Course Catalog
 
-Лабораторная работа №1 по дисциплине Advanced Web Technologies.
-Простой каталог из шести курсов: список, описание каждого курса и кнопка лайка.
-Реализована обязательная часть задания, без бонусных функций.
+A simple student project for Advanced Web Technologies.
 
-Оформление в стиле Бикини-Боттом: морской фон, цветные карточки и декоративный Спанч Боб. Всё оформление сделано Tailwind и обычным CSS в app/globals.css, без дополнительных библиотек и клиентских компонентов.
-
-## Запуск
-
-Нужен Node.js 20.9 или новее (рекомендуется Node.js 22 LTS).
+## Run the project
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Откройте адрес из терминала, обычно http://localhost:3000.
-Если порт занят, Next.js выберет следующий.
-Остановка сервера: Ctrl+C в терминале.
+Open the local address shown in the terminal.
 
-Проверка перед сдачей:
+## Lab 2
+
+I styled the course cards and navigation with Tailwind CSS and shadcn/ui. The catalog shows one column on phones, two on tablets, and three on desktops. The design uses a light background, dark text, and a small blue accent.
+
+## All four bonus tasks
+
+1. **Custom color:** `--color-study-blue` is defined in the `@theme` block in `app/globals.css` and used by the home page button.
+2. **Dark mode:** the site follows your device setting through `prefers-color-scheme`. Cards and navigation use `dark:` classes. No toggle or extra JavaScript is needed.
+3. **Custom button variant:** `variant="study"` in `components/ui/button.tsx` gives the home page button our custom blue color.
+4. **Extra shadcn component:** `Badge` shows course credits on each card.
+
+The optional active navigation highlight is also included. `NavBar` uses `usePathname`, while the layout and course cards stay Server Components. The final grid keeps the required 1/2/3 columns; the suggested four-column exercise is not enabled because the acceptance checklist asks for three desktop columns.
+
+## Simple explanation
+
+- **Tailwind CSS** gives us small classes for styling. For example, `p-6` adds padding and `gap-4` adds space between items.
+- **shadcn/ui** adds component source files to `components/ui`. We use `Card` to group the course information and `Button` for a consistent button style.
+- **CourseCard** receives the course information through props. `CardHeader` holds the title. `CardContent` holds the description, credits, and likes.
+- **Responsive grid:** `grid-cols-1` means one column. `sm:grid-cols-2` means two columns from 640px. `lg:grid-cols-3` means three columns from 1024px.
+- **Hover:** `hover:shadow-md` and `hover:border-blue-300` change the card when the mouse is over it. `transition` makes the change smooth.
+- **Server Component:** `CourseCard` has no `use client` because it does not use state or event handlers.
+- **LikeButton** is a Client Component because it uses `useState` and `onClick`. Clicking it on the course detail page adds one like. Refreshing resets the count.
+
+The whole catalog card is a link. Its like count uses `<Button asChild>` with a span so there is no HTML button nested inside a link. The actual working like button stays on the detail page, as in Lab 1.
+
+## Main files
+
+| File | Purpose |
+| --- | --- |
+| `app/layout.tsx` | Shared navigation, page container, and footer |
+| `app/courses/page.tsx` | Gets the courses and displays the responsive grid |
+| `components/CourseCard.tsx` | Displays one course with shadcn components |
+| `components/LikeButton.tsx` | Handles the like counter on the detail page |
+| `components/ui/` | Reusable shadcn Button and Card components |
+| `app/globals.css` | Tailwind import, theme colors, and basic styles |
+| `lib/courses.ts` | Original course data and data functions |
+
+## Check before submission
 
 ```bash
 npm run lint
 npm run build
 ```
 
-Чтобы открыть собранную production-версию, после сборки выполните `npm start`.
-Перед этим остановите dev-сервер, если он занимает тот же порт.
+In browser DevTools, open `/courses` and test 375px, 768px, and 1280px. You should see 1, 2, and 3 columns. Open a course and click the like button. Also check Home, About, and `/courses/does-not-exist`.
 
-## Соответствие пунктам задания
+## Short explanation for class
 
-1. Проект создан через create-next-app: Next.js 16, React 19, TypeScript, Tailwind CSS, ESLint, App Router. Папки src нет, алиас — @/*.
-2. В lib/courses.ts дословно перенесены тип Course, шесть курсов и функции из задания. Задержка 300 мс имитирует получение данных.
-3. Главная страница содержит заголовок, приветствие и Link на каталог. About содержит три предложения о проекте.
-4. Серверная страница /courses вызывает await getCourses(). CourseCard принимает ровно заданные props, вся карточка является Link.
-5. Страница /courses/[id] использует await params, await getCourse(id), notFound() и generateStaticParams(). Есть loading.tsx и courses/not-found.tsx.
-6. LikeButton принимает только initialLikes, использует useState<number> и увеличивает число на 1. Это единственный исходный файл с директивой "use client".
-7. В общем layout находятся ссылки Home / Courses / About. Оформление сделано классами Tailwind.
-8. В Git есть последовательные коммиты по этапам работы. Для сдачи используется ссылка на этот репозиторий.
+“In this lab, I changed the appearance of my course catalog. I used shadcn Card and Button components. Tailwind classes control the spacing, colors, and responsive grid. The card is still a Server Component. The like button uses client-side state, and the navigation uses the current path.”
 
-## Какие файлы нужно понимать
+## Submission
 
-| Файл | Что делает |
-| --- | --- |
-| app/layout.tsx | Общая HTML-оболочка и навигация; children — содержимое текущей страницы |
-| app/page.tsx | Главная страница / |
-| app/about/page.tsx | Статическая страница /about |
-| lib/courses.ts | Тип Course, массив данных, getCourses и getCourse |
-| app/courses/page.tsx | Получает курсы на сервере и выводит карточки через map |
-| components/CourseCard.tsx | Карточка-ссылка с типизированными props |
-| app/courses/[id]/page.tsx | Получает id из адреса, находит курс и показывает его |
-| app/courses/[id]/loading.tsx | Текст, пока страница курса ожидает данные |
-| app/courses/not-found.tsx | Сообщение для несуществующего курса |
-| components/LikeButton.tsx | Состояние счётчика и обработка нажатия |
-| app/globals.css | Подключает Tailwind и задаёт шрифт |
+Repository: https://github.com/MURXIV/course-catalog
 
-## Как показать работу на защите
-
-1. Запустить npm run dev. Открыть /, перейти на About, затем Courses. Показать общую навигацию.
-2. На /courses показать шесть карточек. Открыть lib/courses.ts и объяснить, что это временные данные вместо backend.
-3. Открыть курс Modern Frontend. Показать адрес /courses/modern-frontend и объяснить папку [id].
-4. Нажать лайк три раза: 24 → 27. Обновить страницу: снова 24, потому что сохранения на сервере пока нет.
-5. Открыть /courses/does-not-exist: появится «Курс не найден». Вернуться по ссылке в каталог.
-6. Открыть код страницы курса: показать await params, getCourse, проверку существования и generateStaticParams.
-7. Показать успешный npm run build и историю git log --oneline.
-
-## Короткие ответы для защиты
-
-**Зачем Next.js, если есть React?** React описывает компоненты интерфейса, а Next.js добавляет маршрутизацию по файлам, серверный рендеринг и сборку страниц.
-
-**Почему страницы и карточки серверные?** Им нужны только данные и разметка. Там нет состояния и обработчиков событий. Страницы App Router серверные по умолчанию.
-
-**Почему LikeButton клиентский?** Он использует useState и onClick. Директива "use client" обозначает границу клиентского кода. При первом открытии Next.js также может подготовить его HTML на сервере, а интерактивность подключается в браузере.
-
-**Что такое props?** Входные данные компонента. Например, initialLikes передаёт начальное число лайков от страницы кнопке. TypeScript проверяет их типы.
-
-**Почему await params?** В Next.js 16 параметры страницы передаются как Promise. Сначала получаем объект через await, затем читаем id.
-
-**Что делает generateStaticParams?** Возвращает массив объектов с id курсов. Во время npm run build Next.js заранее создаёт соответствующие страницы. Внутри функции мы ожидаем getCourses(), а не несуществующий в этой функции params.
-
-**Почему карточка не требует use client?** Навигацию выполняет компонент Link. Собственного onClick у карточки нет.
-
-**Почему setLikes использует previous?** Новое число зависит от предыдущего. Запись setLikes((previous) => previous + 1) корректно обрабатывает последовательные обновления состояния.
-
-## Особенности проверки
-
-- Лайки локальны для текущего экземпляра кнопки: при повторных нажатиях сохраняются, после перезагрузки сбрасываются. При уходе со страницы и новом монтировании кнопки также могут сброситься. Это намеренно: задание требует только useState, без backend или localStorage.
-- Индикатор загрузки проверен в dev-режиме при прямом открытии адреса курса. При повторном переходе или в production заранее созданная страница может открыться мгновенно. Для демонстрации можно включить замедление сети в DevTools и открыть адрес курса напрямую; искусственно замедлять приложение дополнительно не нужно.
-- Данные курса и весь список одинаковые для всех пользователей; запросов к внешнему API нет.
-- Деплой, поиск, авторизация и error.tsx относятся к бонусам и не включены.
-
-## Проверено
-
-- npm run dev: сервер запускается.
-- npm run lint: без ошибок.
-- npm run build: успешная сборка и генерация всех шести страниц курсов.
-- В браузере: Home, About, список из шести карточек и все шесть страниц курсов.
-- Переход через Link сохраняет текущий документ, без полной перезагрузки.
-- Лайки: 24 → 27 после трёх нажатий, после перезагрузки снова 24.
-- Неизвестный id показывает «Курс не найден», ссылка возвращает в каталог.
-- loading.tsx появляется при прямой загрузке страницы в dev-режиме.
-- На ширине 390 px нет горизонтальной прокрутки; ошибок JavaScript при проверке не было.
-
-## Сдача
-
-Отправьте преподавателю ссылку на репозиторий course-catalog через LMS или чат курса.
-Срок из задания: до начала Lecture 2, если преподаватель не указал другой.
+Send this repository link to your instructor through the required submission channel.

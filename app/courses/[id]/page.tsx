@@ -18,11 +18,11 @@ export default async function CoursePage({ params }: { params: Promise<{ id: str
   }
 
   return (
-    <article className="paper max-w-3xl space-y-6">
-      <Link href="/courses" className="text-blue-700 hover:underline">← Все курсы</Link>
+    <article className="max-w-3xl space-y-6 rounded-lg border bg-white dark:bg-slate-900 p-6 sm:p-8">
+      <Link href="/courses" className="text-blue-700 dark:text-blue-300 hover:underline">← All courses</Link>
       <h1 className="text-3xl font-bold leading-tight">{course.title}</h1>
-      <p className="text-lg leading-8 text-slate-600">{course.description}</p>
-      <p className="font-medium">Кредиты: {course.credits}</p>
+      <p className="text-lg leading-8 text-slate-600 dark:text-slate-300">{course.description}</p>
+      <p className="font-medium">Credits: {course.credits}</p>
       <LikeButton initialLikes={course.likes} />
     </article>
   );

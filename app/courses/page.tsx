@@ -2,24 +2,17 @@ import CourseCard from "@/components/CourseCard";
 import { getCourses } from "@/lib/courses";
 
 export default async function CoursesPage() {
-  // Данные получаем на сервере, поэтому useEffect здесь не нужен.
+  // Get the course data on the server.
   const courses = await getCourses();
 
   return (
     <section>
-      <p className="sea-label mb-4">Меню знаний</p>
-      <h1 className="text-4xl font-bold">Курсы Бикини-Боттом</h1>
-      <p className="mt-3 font-medium">Выберите курс, чтобы прочитать описание и поставить лайк.</p>
-      <div className="mt-8 grid gap-6 sm:grid-cols-2">
+      <p className="mb-3 text-sm font-medium text-blue-700 dark:text-blue-300">Study program</p>
+      <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Course catalog</h1>
+      <p className="mt-3 text-slate-600 dark:text-slate-300">Choose a course to see the details and leave a like.</p>
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {courses.map((course) => (
-          <CourseCard
-            key={course.id}
-            id={course.id}
-            title={course.title}
-            description={course.description}
-            credits={course.credits}
-            likes={course.likes}
-          />
+          <CourseCard key={course.id} {...course} />
         ))}
       </div>
     </section>

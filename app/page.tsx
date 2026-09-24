@@ -1,26 +1,18 @@
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
   return (
-    <section className="paper grid items-center gap-8 md:grid-cols-[1.4fr_1fr]">
-      <div className="space-y-6">
-        <p className="sea-label">Добро пожаловать в Бикини-Боттом</p>
-        <h1 className="text-4xl leading-tight tracking-tight sm:text-5xl">Я готов!<br />Учиться, конечно.</h1>
-        <p className="text-lg leading-8">
-          Даже на дне океана нужны крутые разработчики. Выбирай курс,
-          погружайся в веб-технологии и ставь лайк тому, что нравится!
-        </p>
-        <Link href="/courses" className="sea-button">Посмотреть курсы →</Link>
-        <p className="text-sm font-bold">6 курсов · Море знаний · Никаких медуз</p>
-      </div>
-      <div aria-hidden="true">
-        <div className="sponge">
-          <div className="sponge-eyes"><i /><i /></div>
-          <div className="sponge-smile" />
-          <div className="sponge-pants" />
-        </div>
-        <p className="mt-8 text-center text-lg font-black">Лови волну знаний!</p>
-      </div>
+    <section className="max-w-2xl space-y-6 py-8 sm:py-16">
+      <p className="text-sm font-medium text-blue-700 dark:text-blue-300">Learn step by step</p>
+      <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
+        A simple place to find your next course.
+      </h1>
+      <p className="max-w-xl text-lg leading-8 text-slate-600 dark:text-slate-300">
+        Explore six courses in web development. Read about each subject,
+        check the credits, and find something you want to learn.
+      </p>
+      <Button asChild variant="study"><Link href="/courses">Browse courses →</Link></Button>
     </section>
   );
 }
