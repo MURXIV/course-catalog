@@ -14,12 +14,12 @@ type CourseCardProps = {
 export default function CourseCard({ id, title, description, credits, likes }: CourseCardProps) {
   return (
     <Link href={`/courses/${id}`} className="block h-full rounded-lg">
-      <Card className="h-full rounded-lg border border-slate-200 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-blue-400 ring-0 hover:shadow-md hover:border-blue-300 transition">
+      <Card className="h-full rounded-lg border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-neutral-400 ring-0 hover:shadow-md hover:border-neutral-300 transition">
         <CardHeader>
           <CardTitle className="text-lg leading-7">{title}</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-1 flex-col gap-4">
-          <p className="flex-1 text-sm leading-6 text-slate-600 dark:text-slate-300">{description}</p>
+          <p className="flex-1 text-sm leading-6 text-neutral-600 dark:text-neutral-300">{description}</p>
           <p className="flex items-center justify-between text-sm">
             <Badge variant="secondary">Credits: {credits}</Badge>
             {/* Render a span to avoid nesting a button inside a link. */}

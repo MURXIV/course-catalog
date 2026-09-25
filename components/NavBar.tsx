@@ -13,7 +13,7 @@ export default function NavBar() {
   const pathname = usePathname();
 
   return (
-    <header className="border-b border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900">
+    <header className="border-b border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900">
       <nav aria-label="Main navigation" className="mx-auto flex max-w-6xl flex-wrap items-center gap-2 px-6 py-4">
         <Link href="/" className="mr-auto w-full py-2 text-lg font-semibold sm:w-auto">Course Catalog</Link>
         {links.map(({ href, label }) => {
@@ -23,7 +23,7 @@ export default function NavBar() {
               key={href}
               href={href}
               aria-current={active ? "page" : undefined}
-              className={`rounded-md px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 ${active ? "bg-slate-100 font-semibold dark:bg-slate-800" : ""}`}
+              className={`rounded-md px-3 py-2 text-sm hover:bg-neutral-100 dark:hover:bg-neutral-800 ${active ? "bg-neutral-100 font-semibold dark:bg-neutral-800" : ""}`}
             >
               {label}
             </Link>
